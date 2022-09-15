@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '../Layout';
-import { showLoding, showError } from '../../utils/message';
+import { showLoading, showError } from '../../utils/message';
 import { login } from '../../api/apiAuth';
 import { Redirect } from 'react-router-dom';
 import { authenticate, isAuthenticated, userInfo } from '../../utils/auth';
@@ -90,7 +90,7 @@ const Login = () => {
     return (
         <Layout title="Login" className="container col-md-8 offset-md-2">
             {redirectUser()}
-            {showLoding(loading)}
+            {showLoading(loading)}
             {showError(error, error)}
             <h3>Login Here,</h3>
             <hr />

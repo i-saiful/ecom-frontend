@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Layout from '../Layout';
-import { showLoding, showError } from '../../utils/message';
+import { showLoading, showError } from '../../utils/message';
 import { register } from '../../api/apiAuth';
 import { Link, Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../../utils/auth';
@@ -97,7 +97,7 @@ const Register = () => {
         <Layout title="Register" className="container col-md-8 offset-md-2">
             {isAuthenticated() && <Redirect to='/' />}
             {showSuccess()}
-            {showLoding(loading)}
+            {showLoading(loading)}
             {showError(error, error)}
             <h3>Register Here,</h3>
             <hr />

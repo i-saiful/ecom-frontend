@@ -8,7 +8,7 @@ export const showSuccess = (success, msg) => {
         return <div className="alert alert-success">{msg}</div>
 }
 
-export const showLoding = loading => {
+export const showLoading = loading => {
     if (loading)
         return <div className="alert alert-info">Loading.....</div>
 }

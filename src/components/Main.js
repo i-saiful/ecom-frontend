@@ -6,7 +6,8 @@ import Dashboard from './user/Dashboard'
 import PrivateRoute from "./protecteRoutes/PrivateRoute";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminRoute from "./protecteRoutes/AdminRoute";
-import CreateCategory from '../components/admin/CreateCategory'
+import CreateCategory from '../components/admin/CreateCategory';
+import CreateProduct from '../components/admin/CreateProduct'
 
 const Main = () => {
     return (<div>
@@ -24,6 +25,9 @@ const Main = () => {
             </AdminRoute>
             <AdminRoute path="/create/category">
                 <CreateCategory />
+            </AdminRoute>
+            <AdminRoute path="/create/product">
+                <CreateProduct />
             </AdminRoute>
 
             <Redirect to='/' />

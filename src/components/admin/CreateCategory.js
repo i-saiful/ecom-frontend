@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../Layout';
-import { showError, showLoding, showSuccess } from '../../utils/message';
+import { showError, showLoading, showSuccess } from '../../utils/message';
 import { Link } from 'react-router-dom';
 import { createCategory } from '../../api/apiAdmin';
 import { userInfo } from '../../utils/auth';
@@ -89,7 +89,7 @@ const CreateCategory = () => {
         <Layout title="Add a new category" description="Ready to add a new category?">
             <div className="row">
                 <div className="col-md-8 offset-md-2">
-                    {showLoding(loading)}
+                    {showLoading(loading)}
                     {showError(error, error)}
                     {showSuccess(success, 'Category Created!')}
                     {categoryForm()}
