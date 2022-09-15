@@ -12,7 +12,12 @@ export const isAuthenticated = () => {
         return false
     if (localStorage.getItem('jwt')) {
         const { exp } = jwt_decode(JSON.parse(localStorage.getItem('jwt')))
-        return (new Date).getTime() < exp * 1000
+        if ((new Date).getTime() < exp * 1000) {
+            return true
+        } else {
+            localStorage.removeItem('jwt')
+            return false
+        }
     } else {
         return false
     }
@@ -24,9 +29,9 @@ export const userInfo = () => {
     return { ...decoded, token: jwt }
 }
 
-export const signOut = callback => {
-    if(typeof window !== 'undefined'){
+export const signOut = cb => {
+    if (typeof window !== 'undefined') {
         localStorage.removeItem('jwt')
-        callback()
+        cb()
     }
 }
