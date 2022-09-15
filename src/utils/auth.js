@@ -12,7 +12,7 @@ export const isAuthenticated = () => {
         return false
     if (localStorage.getItem('jwt')) {
         const { exp } = jwt_decode(JSON.parse(localStorage.getItem('jwt')))
-        if ((new Date).getTime() < exp * 1000) {
+        if (new Date().getTime() < exp * 1000) {
             return true
         } else {
             localStorage.removeItem('jwt')

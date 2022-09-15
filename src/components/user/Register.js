@@ -2,7 +2,8 @@ import { useState } from 'react';
 import Layout from '../Layout';
 import { showLoding, showError } from '../../utils/message';
 import { register } from '../../api/apiAuth';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { isAuthenticated } from '../../utils/auth';
 
 const Register = () => {
     const [values, setValues] = useState({
@@ -84,16 +85,17 @@ const Register = () => {
     );
 
     const showSuccess = () => {
-        if(success)
-        return (
-            <div className='alert alert-primary'>
-                New account created. Please <Link to='/login'>login</Link>
-            </div>
-        )
+        if (success)
+            return (
+                <div className='alert alert-primary'>
+                    New account created. Please <Link to='/login'>login</Link>
+                </div>
+            )
     }
 
     return (
         <Layout title="Register" className="container col-md-8 offset-md-2">
+            {isAuthenticated() && <Redirect to='/' />}
             {showSuccess()}
             {showLoding(loading)}
             {showError(error, error)}

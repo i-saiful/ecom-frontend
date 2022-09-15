@@ -3,7 +3,7 @@ import Layout from '../Layout';
 import { showLoding, showError } from '../../utils/message';
 import { login } from '../../api/apiAuth';
 import { Redirect } from 'react-router-dom';
-import { authenticate } from '../../utils/auth';
+import { authenticate, isAuthenticated, userInfo } from '../../utils/auth';
 
 const Login = () => {
     const [values, setValues] = useState({
@@ -81,6 +81,9 @@ const Login = () => {
 
     const redirectUser = () => {
         if (redirect)
+            return <Redirect to={`/${userInfo().role}/dashboard`} />
+            
+        if (isAuthenticated())
             return <Redirect to='/' />
     }
 
