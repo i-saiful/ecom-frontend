@@ -8,6 +8,7 @@ import AdminDashboard from "./admin/AdminDashboard";
 import AdminRoute from "./protecteRoutes/AdminRoute";
 import CreateCategory from '../components/admin/CreateCategory';
 import CreateProduct from '../components/admin/CreateProduct'
+import ProductDetails from "./home/ProductDetails";
 
 const Main = () => {
     return (<div>
@@ -15,6 +16,7 @@ const Main = () => {
             <Route path='/' exact component={Home} />
             <Route path='/login' exact component={Login} />
             <Route path='/register' exact component={Register} />
+            <Route path='/product/:id' exact component={ProductDetails} />
 
             <PrivateRoute path="/user/dashboard">
                 <Dashboard />

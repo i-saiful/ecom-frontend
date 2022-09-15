@@ -1,4 +1,4 @@
-import { API } from "../utils/congif";
+import { API } from "../utils/config";
 import axios from "axios";
 
 export const createCategory = (token, data) => {
