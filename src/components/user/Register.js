@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Layout from '../Layout';
-import { showLoding, showMessage } from '../../utils/message'
+import { showLoding, showError } from '../../utils/message';
+import { register } from '../../api/apiAuth';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [values, setValues] = useState({
@@ -25,7 +27,38 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log(values);
+        setValues({
+            ...values,
+            error: false,
+            loading: true,
+            disabled: true
+        })
+        register({ name, email, password })
+            .then(response => {
+                setValues({
+                    ...values,
+                    name: '',
+                    email: '',
+                    password: '',
+                    success: true,
+                    loading: false,
+                    error: false
+                })
+            })
+            .catch(err => {
+                let errMsg = ''
+                if (err.response) {
+                    errMsg = err.response.data
+                } else {
+                    errMsg = "Somthing went wrong!"
+                }
+                setValues({
+                    ...values,
+                    error: errMsg,
+                    disabled: false,
+                    loading: false
+                })
+            })
     }
 
     const signUpForm = () => (
@@ -50,8 +83,20 @@ const Register = () => {
         </form>
     );
 
+    const showSuccess = () => {
+        if(success)
+        return (
+            <div className='alert alert-primary'>
+                New account created. Please <Link to='/login'>login</Link>
+            </div>
+        )
+    }
+
     return (
         <Layout title="Register" className="container col-md-8 offset-md-2">
+            {showSuccess()}
+            {showLoding(loading)}
+            {showError(error, error)}
             <h3>Register Here,</h3>
             <hr />
             {signUpForm()}
