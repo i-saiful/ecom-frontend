@@ -4,6 +4,8 @@ import { API } from '../../utils/config';
 import { Link } from 'react-router-dom';
 import { getProductDetails } from '../../api/apiProduct';
 import { showSuccess, showError } from '../../utils/message';
+import { isAuthenticated, userInfo } from '../../utils/auth';
+import { addToCart } from '../../api/apiOrder';
 
 const ProductDetails = (props) => {
     const [product, setProduct] = useState({});
@@ -16,8 +18,36 @@ const ProductDetails = (props) => {
         getProductDetails(id)
             .then(response => setProduct(response.data))
             .catch(err => setError("Failed to load products"))
-            // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
+
+    const handleAddToCart = product => () => {
+        if (isAuthenticated()) {
+            setError(false)
+            setSuccess(false)
+            const user = userInfo()
+            const cartItem = {
+                _id: user._id,
+                product: product._id,
+                price: product.price
+            }
+            addToCart(user.token, cartItem)
+                .then(response => {
+                    setSuccess(true)
+                    console.log(response);
+                })
+                .catch(err => {
+                    console.log();
+                    if (err.response)
+                        setError(err.response.data)
+                    else
+                        setError('adding to cart failed')
+                })
+        } else {
+            setSuccess(false)
+            setError('Please login first')
+        }
+    }
 
     return (
         <Layout title="Product Page">
@@ -46,7 +76,8 @@ const ProductDetails = (props) => {
                     <p>{product.quantity ? (<span className="badge badge-pill badge-primary">In Stock</span>) : (<span className="badge badge-pill badge-danger">Out of Stock</span>)}</p>
                     <p>{product.description}</p>
                     {product.quantity ? <>
-                        &nbsp;<button className="btn btn-outline-primary btn-md">Add to Cart</button>
+                        &nbsp;<button className="btn btn-outline-primary btn-md"
+                            onClick={handleAddToCart(product)}>Add to Cart</button>
                     </> : ""}
                 </div>
             </div>
