@@ -12,3 +12,16 @@ export const getProductDetails = (id) => {
 export const getCategories = () => {
     return axios.get(`${API}/category`)
 }
+
+export const getFilteredProducts = (skip, limit, filters = {}, order, sortBy) => {
+    const data = {
+        order,
+        limit, skip, sortBy,
+        filters
+    }
+    return axios.post(`${API}/product/filter`, data, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
