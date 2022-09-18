@@ -118,9 +118,9 @@ function Home() {
                 {showSuccess(success, "Added to cart successfully!")}
             </div>
             <div className="row">
-                {products && products.map(product => 
-                <Card product={product} key={product._id}
-                handleAddToCart={handleAddToCart(product)} />)}
+                {products && products.map(product =>
+                    <Card product={product} key={product._id}
+                        handleAddToCart={handleAddToCart(product)} />)}
             </div>
         </Layout>
     )

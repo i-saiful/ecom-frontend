@@ -24,33 +24,33 @@ const CreateCategory = () => {
             success: false,
         })
 
-        const {token} = userInfo();
-        createCategory(token, {name})
-        .then(response =>{
-            setValues({
-                ...values,
-                error: false,
-                loading: false,
-                success: true
+        const { token } = userInfo();
+        createCategory(token, { name })
+            .then(response => {
+                setValues({
+                    ...values,
+                    error: false,
+                    loading: false,
+                    success: true
+                })
             })
-        })
-        .catch(err => {
-            if(err.response){
-                setValues({
-                    ...values,
-                    error: err.response.data,
-                    loading: false,
-                    success: false
-                })
-            } else {
-                setValues({
-                    ...values,
-                    error: "Somthing went wrog!",
-                    loading: false,
-                    success: false
-                })
-            }
-        })
+            .catch(err => {
+                if (err.response) {
+                    setValues({
+                        ...values,
+                        error: err.response.data,
+                        loading: false,
+                        success: false
+                    })
+                } else {
+                    setValues({
+                        ...values,
+                        error: "Somthing went wrog!",
+                        loading: false,
+                        success: false
+                    })
+                }
+            })
     }
 
     const handleChange = (e) => {
@@ -98,7 +98,6 @@ const CreateCategory = () => {
             </div>
         </Layout>
     );
-
 }
 
 export default CreateCategory;

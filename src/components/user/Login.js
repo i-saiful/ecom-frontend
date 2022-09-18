@@ -82,7 +82,7 @@ const Login = () => {
     const redirectUser = () => {
         if (redirect)
             return <Redirect to={`/${userInfo().role}/dashboard`} />
-            
+
         if (isAuthenticated())
             return <Redirect to='/' />
     }

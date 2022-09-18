@@ -50,7 +50,7 @@ const CreateProduct = () => {
                     formData: new FormData()
                 })
             })
-            // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [])
 
     const handleChange = (e) => {
