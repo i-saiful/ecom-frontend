@@ -46,10 +46,8 @@ function Home() {
             addToCart(user.token, cartItem)
                 .then(response => {
                     setSuccess(true)
-                    console.log(response);
                 })
                 .catch(err => {
-                    console.log();
                     if (err.response)
                         setError(err.response.data)
                     else
