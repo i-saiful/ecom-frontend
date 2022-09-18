@@ -34,3 +34,20 @@ export const deleteCartItem = (token, cartItem) => {
         }
     })
 }
+
+export const getProfile = token => {
+    return axios.get(`${API}/profile`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
+
+export const updateProfile = (token, data) => {
+    return axios.post(`${API}/profile`, data, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        }
+    })
+}

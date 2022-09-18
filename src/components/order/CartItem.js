@@ -12,7 +12,7 @@ const CartItem = ({ item, serial, increaseItem, decreaseItem, deleteItem }) => {
             <td>
                 <button className="btn btn-outline-primary btn-sm"
                     onClick={decreaseItem}>-</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;{item.count}&nbsp;&nbsp;
                 <button className="btn btn-outline-primary btn-sm"
                     onClick={increaseItem}>+</button>
             </td>

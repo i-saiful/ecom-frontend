@@ -60,7 +60,7 @@ const Cart = () => {
         <Layout title="Your Cart" description="Hurry up! Place your order!" className="container">
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
-                    <li className="breadcrumb-item"><a href="#">Order</a></li>
+                    <li className="breadcrumb-item"><Link to="/">Order</Link></li>
                     <li className="breadcrumb-item active" aria-current="page">Cart</li>
                 </ol>
             </nav>
@@ -95,7 +95,7 @@ const Cart = () => {
                             <th scope="row" />
                             <td colSpan={5} className="text-right">
                                 <Link to="/"><button className="btn btn-warning mr-4">Continue Shoping</button></Link>
-                                <Link to="/checkout" className="btn btn-success mr-4">Proceed To Checkout</Link>
+                                <Link to="/shipping" className="btn btn-success mr-4">Proceed To Checkout</Link>
                             </td>
                         </tr>
                     </tbody>
