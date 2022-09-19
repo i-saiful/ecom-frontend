@@ -12,6 +12,7 @@ import ProductDetails from "./home/ProductDetails";
 import Cart from "./order/Cart";
 import ShippingAddress from './order/ShippingAddress'
 import Checkout from "./order/Checkout";
+import Payment from "./order/Payment";
 
 const Main = () => {
     return (<div>
@@ -32,6 +33,9 @@ const Main = () => {
             </PrivateRoute>
             <PrivateRoute exact path="/checkout">
                 <Checkout />
+            </PrivateRoute>
+            <PrivateRoute exact path="/payment">
+                <Payment />
             </PrivateRoute>
 
             <AdminRoute path="/admin/dashboard">
