@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Layout from '../Layout';
 import { showLoading, showError } from '../../utils/message';
 import { login } from '../../api/apiAuth';
 import { Redirect } from 'react-router-dom';
 import { authenticate, isAuthenticated, userInfo } from '../../utils/auth';
+import {API} from '../../utils/config'
 
-const Login = () => {
+const Login = (props) => {
     const [values, setValues] = useState({
         email: '',
         password: '',
@@ -15,6 +16,24 @@ const Login = () => {
         redirect: false
     });
 
+    useEffect(() => {
+        if (props.location.search) {
+            const { token } = JSON.parse(decodeURI(props.location.search).slice(1))
+            if (token) {
+                authenticate(token, () => {
+                    setValues({
+                        ...values,
+                        email: '',
+                        password: '',
+                        success: true,
+                        loading: false,
+                        error: false,
+                        redirect: true
+                    })
+                })
+            }
+        }
+    }, [props.location.search])
     const { email, password, loading, error, redirect, disabled } = values;
 
     const handleChange = e => {
@@ -87,6 +106,10 @@ const Login = () => {
             return <Redirect to='/' />
     }
 
+    const handleSignIn = e => {
+        window.open(`${API}/auth/${e}`, '_self')
+    }
+
     return (
         <Layout title="Login" className="container col-md-8 offset-md-2">
             {redirectUser()}
@@ -96,6 +119,12 @@ const Login = () => {
             <hr />
             {signInForm()}
             <hr />
+            <button className='btn btn-outline-primary'
+                onClick={() => handleSignIn('google')}>
+                <i className="bi bi-google mr-2"></i>Login with Google</button>
+            <button className='btn btn-outline-primary mx-4'
+                onClick={() => handleSignIn('facebook')}>
+                <i className="bi bi-facebook mr-2"></i>Login with Facebook</button>
         </Layout>
     );
 }

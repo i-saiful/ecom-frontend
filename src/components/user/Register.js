@@ -4,6 +4,7 @@ import { showLoading, showError } from '../../utils/message';
 import { register } from '../../api/apiAuth';
 import { Link, Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../../utils/auth';
+import {API} from '../../utils/config'
 
 const Register = () => {
     const [values, setValues] = useState({
@@ -93,6 +94,10 @@ const Register = () => {
             )
     }
 
+    const handleSignUp = e => {
+        window.open(`${API}/auth/${e}`, '_self')
+    }
+
     return (
         <Layout title="Register" className="container col-md-8 offset-md-2">
             {isAuthenticated() && <Redirect to='/' />}
@@ -103,6 +108,12 @@ const Register = () => {
             <hr />
             {signUpForm()}
             <hr />
+            <button className='btn btn-outline-primary'
+                onClick={() => handleSignUp('google')}>
+                <i className="bi bi-google mr-2"></i>Sign up with Google</button>
+            <button className='btn btn-outline-primary mx-4'
+                onClick={() => handleSignUp('facebook')}>
+                <i className="bi bi-facebook mr-2"></i>Sign up with Facebook</button>
         </Layout>
     );
 }
