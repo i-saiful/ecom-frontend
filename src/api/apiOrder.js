@@ -59,3 +59,11 @@ export const initPayment = token => {
         }
     })
 }
+
+export const getOrder = token => {
+    return axios.get(`${API}/order`, {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+}

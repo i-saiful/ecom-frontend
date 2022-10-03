@@ -33,7 +33,8 @@ const Login = (props) => {
                 })
             }
         }
-    }, [props.location.search])
+        // eslint-disable-next-line
+    }, [])
     const { email, password, loading, error, redirect, disabled } = values;
 
     const handleChange = e => {
