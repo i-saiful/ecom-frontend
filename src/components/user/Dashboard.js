@@ -113,7 +113,7 @@ const Dashboard = () => {
                     <li className='list-group-item'>
                         <div className='d-flex justify-content-between align-items-center'>
                             Discount
-                            <span>{modalData.discount}</span>
+                            <span>-{modalData.discount}</span>
                         </div>
                     </li>
                     <li className='list-group-item'>

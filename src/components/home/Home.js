@@ -158,7 +158,7 @@ function Home() {
                 // disabled={products.length}
                 onClick={() => setSkip(skip + 4)}
                 className={products.length === 4 ? "btn btn-outline-primary" : 'd-none'}>
-                Add More</button>
+                Load More</button>
         </div>
 
     return (
