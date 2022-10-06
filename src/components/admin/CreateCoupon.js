@@ -58,7 +58,7 @@ function CreateCoupon() {
     }
 
     const loadCoupon = token => getCoupon(token)
-        .then(res => {setStoreCoupon(res.data);console.log('call');})
+        .then(res => setStoreCoupon(res.data))
         .catch(() => setError('Failed to load coupon list!'))
 
     const handleChanlge = e => {
