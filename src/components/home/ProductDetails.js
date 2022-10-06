@@ -42,7 +42,7 @@ const ProductDetails = (props) => {
                         <div className='ml-3'>
                             <p className='card-title m-0 h5'>{userName}</p>
                             <p className='text-muted m-0'><small>{
-                                Date(createdAt).toString().split(' ', 5)
+                                new Date(createdAt).toString().split(' ', 4)
                                     .map(i => i).join(' ')
                             }</small></p>
                         </div>
