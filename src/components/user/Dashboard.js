@@ -51,10 +51,10 @@ const Dashboard = () => {
                         {order.map(item =>
                             <tr key={item._id}>
                                 <td>{item.transaction_id}</td>
-                                <td>{Date(item.createdAt).toString()
+                                <td>{new Date(item.createdAt).toString()
                                     .split(' ', 4).join(' ')}</td>
                                 <td>{item.status}</td>
-                                <td>{
+                                <td>৳ {
                                     item.cartItems.reduce(
                                         (total, item) =>
                                             total + item.count * item.price, 0
@@ -94,7 +94,7 @@ const Dashboard = () => {
                                         width="65px" height="65px" alt={item.product.name} />
                                     <div className='ml-3 d-flex justify-content-between align-items-center w-100'>
                                         {item.product.name}
-                                        <span>{item.count} X {item.price}</span>
+                                        <span>{item.count} X ৳ {item.price}</span>
                                     </div>
                                 </div>
                             </li>
@@ -102,7 +102,7 @@ const Dashboard = () => {
                     <li className='list-group-item'>
                         <div className='d-flex justify-content-between align-items-center'>
                             Sub Total
-                            <span>{
+                            <span>৳ {
                                 modalData.cartItems
                                     .reduce((total, item) =>
                                         total + item.count * item.price
@@ -113,13 +113,13 @@ const Dashboard = () => {
                     <li className='list-group-item'>
                         <div className='d-flex justify-content-between align-items-center'>
                             Discount
-                            <span>-{modalData.discount}</span>
+                            <span>- ৳ {modalData.discount}</span>
                         </div>
                     </li>
                     <li className='list-group-item'>
                         <div className='d-flex justify-content-between align-items-center'>
                             Total
-                            <span>{
+                            <span>৳ {
                                 modalData.cartItems
                                     .reduce((total, item) =>
                                         total + item.count * item.price

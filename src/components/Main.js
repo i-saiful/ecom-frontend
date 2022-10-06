@@ -13,6 +13,7 @@ import Cart from "./order/Cart";
 import ShippingAddress from './order/ShippingAddress'
 import Checkout from "./order/Checkout";
 import Payment from "./order/Payment";
+import CreateCoupon from "./admin/CreateCoupon";
 
 const Main = () => {
     return (<div>
@@ -46,6 +47,9 @@ const Main = () => {
             </AdminRoute>
             <AdminRoute path="/create/product">
                 <CreateProduct />
+            </AdminRoute>
+            <AdminRoute path="/create/coupon">
+                <CreateCoupon />
             </AdminRoute>
 
             <Redirect to='/' />

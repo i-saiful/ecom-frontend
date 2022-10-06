@@ -3,9 +3,13 @@ import { getCartItems, getProfile } from '../../api/apiOrder';
 import { userInfo } from '../../utils/auth';
 import Layout from '../Layout';
 import { Link } from 'react-router-dom';
+import { checkCoupon } from '../../api/apiCoupon';
 
 const Checkout = () => {
     const [orderItems, setOrderItems] = useState([]);
+    const [discount, setDiscount] = useState(0);
+    const [coupon, setCoupon] = useState('')
+    const [couponName, setCouponName] = useState('')
     const [values, setValues] = useState({
         phone: '',
         address1: '',
@@ -55,6 +59,17 @@ const Checkout = () => {
         </>
     )
 
+    const handleSubmit = () => {
+        // console.log('sdfs')
+        checkCoupon(userInfo().token, coupon)
+            .then(res => {
+                setDiscount(res.data.amount || 0)
+                setCouponName(res.data.name || '')
+            })
+            .catch(() => setDiscount(0))
+        setCoupon('')
+    }
+
     if (address1 && phone && city && postcode && country) {
         return (<>
             <Layout title="Checkout" description="Complete your order!" className="container">
@@ -77,19 +92,36 @@ const Checkout = () => {
                             </div>
                         </div>
                         <div className="col-md-4">
+                            {/* coupon form */}
+                            <div className='card mb-3'>
+                                <div className="card-header">Coupon Form</div>
+                                <div className="card-body text-right">
+                                    <input type="text"
+                                        className='form-control'
+                                        value={coupon}
+                                        onChange={(e) => setCoupon(e.target.value)} />
+                                    <button
+                                        onClick={() => handleSubmit()}
+                                        className='btn btn-outline-primary mt-2'>Submit</button>
+                                </div>
+                            </div>
+
+                            {/* item list  */}
                             <div className="card" style={{ height: 'auto' }}>
                                 <div className="card-body">
                                     <ul className="list-group list-group-flush">
                                         {orderItems.map(item => (<li key={item._id} className="list-group-item" align="right">{item.product ? item.product.name : ""} x {item.count} = ৳ {item.price * item.count} </li>))}
+                                        <li className="list-group-item" align="right">SubTotal = ৳ {getOrderTotal()} </li>
+                                        <li className="list-group-item" align="right">Discount = ৳ -{discount} </li>
                                     </ul>
                                 </div>
                                 <div className="card-footer">
                                     <span className="float-left"><b>Order Total</b></span>
-                                    <span className="float-right"><b>৳ {getOrderTotal()}</b></span>
+                                    <span className="float-right"><b>৳ {getOrderTotal() - discount}</b></span>
                                 </div>
                             </div>
                             <br />
-                            <p><Link className="btn btn-warning btn-md" to="/payment">Make Payment</Link></p>
+                            <p><Link className="btn btn-warning btn-md" to={`/payment?${couponName}`}>Make Payment</Link></p>
                         </div>
                     </div>
                 </div>

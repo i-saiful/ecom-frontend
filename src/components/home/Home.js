@@ -19,6 +19,7 @@ function Home() {
     const [sortBy, setSortBy] = useState('name')
     const [categories, setCategories] = useState([])
     const [search, setSearch] = useState('')
+    const [isEmpty, setIsEmpty] = useState(false)
     const [filters, setFilters] = useState({
         category: [],
         price: []
@@ -88,19 +89,27 @@ function Home() {
         }
 
         setLimit(4)
-        setFilters(newFilters)
+        // setFilters(newFilters)
         getFilteredProducts(skip, limit, newFilters, order, sortBy)
-            .then(res => setProducts(res.data))
+            .then(res => {
+                // if (res.data.length !== 0)
+                    setProducts(res.data)
+                setIsEmpty(res.data.length < 4)
+            })
             .catch(err => setError('Failed to load filters'))
 
         setFilters({
-            ...filters,
+            ...newFilters,
             search: ''
         })
+        // console.log(filters);
+        // console.log(filters);
     }
 
     useEffect(() => {
         handleFilters()
+        // handleFilters(null, 'category')
+        // handleFilters(null, 'price')
         // eslint-disable-next-line
     }, [order, sortBy, skip])
 
@@ -157,7 +166,7 @@ function Home() {
             <button
                 // disabled={products.length}
                 onClick={() => setSkip(skip + 4)}
-                className={products.length === 4 ? "btn btn-outline-primary" : 'd-none'}>
+                className={!isEmpty ? "btn btn-outline-primary" : 'd-none'}>
                 Load More</button>
         </div>
 

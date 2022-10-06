@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { initPayment } from "../../api/apiOrder";
 import { userInfo } from "../../utils/auth";
-import { Link } from "react-router-dom";
+import { Link , useLocation} from "react-router-dom";
 
 const Payment = () => {
+    const coupon = useLocation().search.slice(1)
     const [sessionSuccess, setSessionSuccess] = useState(false);
     const [failed, setFailed] = useState(false)
     const [redirectUrl, setRidirectUrl] = useState(false)
 
     useEffect(() => {
-        initPayment(userInfo().token)
+        initPayment(userInfo().token, coupon)
             .then(response => {
                 if (response.data.status === 'SUCCESS') {
                     console.log(response.data.status);
@@ -20,7 +21,7 @@ const Payment = () => {
                 setFailed(false)
                 setSessionSuccess(false)
             })
-    }, [])
+    }, [coupon])
 
     return (
         <div>
